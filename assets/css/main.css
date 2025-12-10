@@ -1,0 +1,181 @@
+/* ===== IMPORT BASE ===== */
+@import 'base/_reset.css';
+@import 'base/_variables.css';
+@import 'base/_utilities.css';
+
+/* ===== IMPORT COMPONENTS ===== */
+@import 'components/_header.css';
+@import 'components/_footer.css';
+@import 'components/_buttons.css';
+@import 'components/_cards.css';
+
+/* ===== IMPORT LAYOUTS ===== */
+@import 'layouts/_hero-slider.css'; /* ✅ REEMPLAZA _hero.css */
+@import 'layouts/_services.css';
+@import 'layouts/_video.css'; /* ✅ NUEVO IMPORT */
+
+/* ===== IMPORT PAGES ===== */
+@import 'pages/_home.css';
+
+/* ===== ESTILOS GLOBALES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--color-gray-800);
+    background-color: var(--color-white);
+    overflow-x: hidden;
+}
+
+/* Contenedor principal */
+.container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* Espaciado de secciones */
+.section-padding {
+    padding: 4rem 0;
+}
+
+@media (max-width: 768px) {
+    .section-padding {
+        padding: 2.5rem 0;
+    }
+}
+
+/* Background colors */
+.bg-light {
+    background-color: var(--color-gray-50);
+}
+
+.bg-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* Títulos de sección */
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    color: var(--color-gray-900);
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: var(--text-2xl);
+    }
+    
+    .section-subtitle {
+        font-size: var(--text-base);
+    }
+}
+
+/* Ajuste para header fixed */
+main {
+    padding-top: 80px;
+}
+
+@media (min-width: 992px) {
+    main {
+        padding-top: 0;
+    }
+}
+
+
+
+/* ===== OPTIMIZACIONES FINALES ===== */
+
+/* Mejoras de performance */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Evitar layout shifts */
+.aspect-ratio {
+    position: relative;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+}
+
+.aspect-ratio-16-9 {
+    padding-bottom: 56.25%; /* 16:9 */
+}
+
+.aspect-ratio-4-3 {
+    padding-bottom: 75%; /* 4:3 */
+}
+
+.aspect-ratio > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Print styles */
+@media print {
+    .header,
+    .footer,
+    .whatsapp-float,
+    .hero-slider .slider-controls {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+    
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+}
