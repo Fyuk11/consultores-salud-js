@@ -4,21 +4,25 @@
     height: 85vh;
     min-height: 600px;
     overflow: hidden;
-    margin-top: 40px; /* Para compensar el header fixed */
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
+/* MOBILE: SIN MARGEN ARRIBA, OCUPANDO TODO */
 @media (max-width: 768px) {
     .hero-slider {
-        height: 70vh;
-        min-height: 500px;
-        margin-top: 70px;
+        height: 60vh; /* Reducido para mobile */
+        min-height: 400px;
+        margin-top: 0 !important; /* ⭐ ELIMINAR MARGEN ARRIBA */
+        margin-bottom: 0;
     }
 }
 
 @media (max-width: 480px) {
     .hero-slider {
-        height: 65vh;
-        min-height: 450px;
+        height: 55vh;
+        min-height: 350px;
     }
 }
 
@@ -26,6 +30,9 @@
     position: relative;
     width: 100%;
     height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 /* ===== SLIDES INDIVIDUALES ===== */
@@ -37,9 +44,11 @@
     height: 100%;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
+    transition: opacity 0.8s ease;
     display: flex;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 .hero-slide.active {
@@ -55,42 +64,63 @@
     width: 100%;
     height: 100%;
     z-index: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
-/* Colores de fondo por defecto (si no hay imagen) */
+/* Colores SOBRE la imagen */
 .slide-color-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 2;
+    mix-blend-mode: multiply;
+    opacity: 0.6;
+    margin: 0;
+    padding: 0;
 }
 
 .slide-1-bg {
     background: linear-gradient(135deg, 
-        rgba(37, 99, 235, 0.9) 0%, 
-        rgba(59, 130, 246, 0.8) 100%);
+        rgba(37, 99, 235, 0.7) 0%, 
+        rgba(59, 130, 246, 0.6) 100%);
 }
 
 .slide-2-bg {
     background: linear-gradient(135deg, 
-        rgba(16, 185, 129, 0.9) 0%, 
-        rgba(52, 211, 153, 0.8) 100%);
+        rgba(16, 185, 129, 0.7) 0%, 
+        rgba(52, 211, 153, 0.6) 100%);
 }
 
 .slide-3-bg {
     background: linear-gradient(135deg, 
-        rgba(139, 92, 246, 0.9) 0%, 
-        rgba(167, 139, 250, 0.8) 100%);
+        rgba(139, 92, 246, 0.7) 0%, 
+        rgba(167, 139, 250, 0.6) 100%);
 }
 
-/* Imagen del slide */
+/* Imagen del slide - CUBRIR COMPLETAMENTE */
 .slide-image {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    display: block;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+}
+
+/* MOBILE: Asegurar que la imagen cubra TODO */
+@media (max-width: 768px) {
+    .slide-image {
+        object-fit: cover;
+        object-position: center top; /* Para que no quede espacio arriba */
+    }
 }
 
 /* Overlay para mejor legibilidad */
@@ -101,34 +131,46 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, 
-        rgba(0, 0, 0, 0.7) 0%, 
-        rgba(0, 0, 0, 0.5) 50%, 
-        rgba(0, 0, 0, 0.3) 100%);
-    z-index: 1;
+        rgba(0, 0, 0, 0.5) 0%, 
+        rgba(0, 0, 0, 0.3) 50%, 
+        rgba(0, 0, 0, 0.1) 100%);
+    z-index: 3;
+    margin: 0;
+    padding: 0;
 }
 
 /* ===== CONTENIDO DEL SLIDE ===== */
 .hero-slide .container {
     position: relative;
-    z-index: 2;
+    z-index: 4;
     width: 100%;
+    margin: 0;
+    padding: 0 var(--container-padding);
 }
 
 .hero-slide .hero-content {
     max-width: 650px;
     color: var(--color-white);
     text-align: left;
-    padding: 2rem 0;
+    padding: 0;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .hero-slide .hero-content {
+        text-align: center;
+        max-width: 100%;
+        padding-top: 1rem; /* Pequeño espacio desde arriba en mobile */
+    }
 }
 
 .hero-slide .hero-title {
     font-size: var(--text-4xl);
     font-weight: var(--font-bold);
     color: var(--color-white);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     line-height: 1.2;
-    animation: fadeInUp 0.8s ease-out;
 }
 
 @media (min-width: 768px) {
@@ -139,24 +181,32 @@
 
 @media (max-width: 480px) {
     .hero-slide .hero-title {
-        font-size: var(--text-2xl);
-        margin-bottom: 1rem;
+        font-size: var(--text-xl);
+        margin-bottom: 0.75rem;
+        padding: 0;
     }
 }
 
 .hero-slide .hero-subtitle {
     font-size: var(--text-lg);
     color: rgba(255, 255, 255, 0.95);
-    margin-bottom: 2.5rem;
-    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+@media (max-width: 768px) {
+    .hero-slide .hero-subtitle {
+        font-size: var(--text-base);
+        margin-bottom: 1.25rem;
+        padding: 0;
+    }
 }
 
 @media (max-width: 480px) {
     .hero-slide .hero-subtitle {
-        font-size: var(--text-base);
-        margin-bottom: 2rem;
+        font-size: var(--text-sm);
+        margin-bottom: 1rem;
     }
 }
 
@@ -164,28 +214,26 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    animation: fadeInUp 0.8s ease-out 0.4s both;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .hero-slide .hero-cta {
         flex-direction: column;
-    }
-    
-    .hero-slide .hero-cta .btn {
-        width: 100%;
-        justify-content: center;
+        align-items: center;
+        gap: 0.75rem;
     }
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+.hero-slide .hero-cta .btn {
+    min-width: 200px;
+}
+
+@media (max-width: 768px) {
+    .hero-slide .hero-cta .btn {
+        width: 100%;
+        max-width: 280px;
+        padding: 0.75rem 1rem;
+        font-size: var(--text-sm);
     }
 }
 
@@ -195,13 +243,13 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background-color: rgba(255, 255, 255, 0.2);
     border: none;
     border-radius: var(--radius-full);
     color: var(--color-white);
-    font-size: 1.25rem;
+    font-size: 1rem;
     cursor: pointer;
     z-index: 10;
     display: flex;
@@ -209,6 +257,8 @@
     justify-content: center;
     transition: all var(--transition-normal);
     backdrop-filter: blur(5px);
+    margin: 0;
+    padding: 0;
 }
 
 .slider-prev:hover,
@@ -218,51 +268,54 @@
 }
 
 .slider-prev {
-    left: 2rem;
+    left: 1rem;
 }
 
 .slider-next {
-    right: 2rem;
+    right: 1rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .slider-prev,
     .slider-next {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
+        width: 35px;
+        height: 35px;
+        font-size: 0.875rem;
     }
     
     .slider-prev {
-        left: 1rem;
+        left: 0.5rem;
     }
     
     .slider-next {
-        right: 1rem;
+        right: 0.5rem;
     }
 }
 
 /* Indicadores (puntos) */
 .slider-indicators {
     position: absolute;
-    bottom: 2rem;
+    bottom: 1rem;
     left: 0;
     right: 0;
     display: flex;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
     z-index: 10;
+    margin: 0;
+    padding: 0;
 }
 
 .indicator {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: var(--radius-full);
     border: none;
     background-color: rgba(255, 255, 255, 0.5);
     cursor: pointer;
     transition: all var(--transition-normal);
     padding: 0;
+    margin: 0;
 }
 
 .indicator:hover {
@@ -272,16 +325,16 @@
 
 .indicator.active {
     background-color: var(--color-white);
-    width: 30px;
+    width: 25px;
 }
 
 /* Auto-play toggle */
 .autoplay-toggle {
     position: absolute;
-    bottom: 2rem;
-    right: 2rem;
-    width: 40px;
-    height: 40px;
+    bottom: 1rem;
+    right: 1rem;
+    width: 35px;
+    height: 35px;
     background-color: rgba(255, 255, 255, 0.2);
     border: none;
     border-radius: var(--radius-md);
@@ -293,6 +346,8 @@
     justify-content: center;
     transition: all var(--transition-normal);
     backdrop-filter: blur(5px);
+    margin: 0;
+    padding: 0;
 }
 
 .autoplay-toggle:hover {
@@ -300,17 +355,13 @@
     transform: scale(1.1);
 }
 
-@media (max-width: 768px) {
-    .slider-indicators {
-        bottom: 1.5rem;
-        gap: 0.5rem;
-    }
-    
+@media (max-width: 480px) {
     .autoplay-toggle {
-        bottom: 1.5rem;
-        right: 1rem;
-        width: 35px;
-        height: 35px;
+        bottom: 0.75rem;
+        right: 0.75rem;
+        width: 30px;
+        height: 30px;
+        font-size: 0.875rem;
     }
 }
 
@@ -326,66 +377,58 @@
     color: var(--color-primary);
 }
 
+/* ===== FIX ULTIMATE PARA MOBILE ===== */
 
-/* Agrega esto al final de _hero-slider.css */
-.hero-slides-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* ✅ Esto es crucial */
-    border-radius: 0; /* Asegurar sin bordes */
+/* 1. Eliminar cualquier espacio alrededor en mobile */
+@media (max-width: 768px) {
+    .hero-slider {
+        position: relative;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+    }
+    
+    .hero-slides-container,
+    .hero-slide,
+    .slide-bg {
+        border-radius: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Asegurar que ocupe 100% del ancho del viewport */
+    .hero-slider {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin-left: calc(-1 * var(--container-padding, 1rem)) !important;
+        margin-right: calc(-1 * var(--container-padding, 1rem)) !important;
+        left: calc(-1 * var(--container-padding, 1rem));
+    }
 }
 
-.slide-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    overflow: hidden; /* ✅ Esto también ayuda */
+/* 2. Ajustar altura para que no quede espacio abajo */
+@media (max-width: 768px) and (orientation: portrait) {
+    .hero-slider {
+        height: 50vh !important;
+        min-height: 350px !important;
+    }
+    
+    .slide-image {
+        object-fit: cover !important;
+        object-position: center 25% !important;
+    }
 }
 
-.slide-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
+/* 3. Si aún hay espacio, forzar coverage total */
+@media (max-width: 768px) {
+    .slide-image {
+        min-height: 100% !important;
+        min-width: 100% !important;
+        width: auto !important;
+        height: auto !important;
+    }
 }
 
-
-
-
-
-
-/* Opción B: Colores SOBRE la imagen (como overlay de color) */
-.slide-color-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2; /* ENCIMA de la imagen */
-    mix-blend-mode: multiply; /* Mezcla bonita con la imagen */
-    opacity: 1.9; /* Transparencia */
-}
-
-.slide-image {
-    z-index: 1; /* DEBAJO del color */
-}
-
-.slide-overlay {
-    z-index: 3; /* ENCIMA del color pero debajo del texto */
-    background: linear-gradient(90deg, 
-        rgba(0, 0, 0, 0.6) 0%, 
-        rgba(0, 0, 0, 0.4) 50%, 
-        rgba(0, 0, 0, 0.2) 100%);
-}
-
-.hero-slide .container {
-    z-index: 4; /* ENCIMA de todo */
-}

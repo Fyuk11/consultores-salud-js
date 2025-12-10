@@ -16,6 +16,11 @@
 
 /* ===== IMPORT PAGES ===== */
 @import 'pages/_home.css';
+@import 'pages/_servicios.css'; /* ✅ Asegurar que está */
+@import 'pages/_empresas.css';
+@import 'pages/_referidos.css';
+@import 'pages/_contacto.css';
+@import 'pages/_trabajo.css';
 
 /* ===== ESTILOS GLOBALES ===== */
 * {
@@ -177,5 +182,98 @@ img {
     .container {
         max-width: 100%;
         padding: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== FIX PARA ESPACIOS EN MOBILE ===== */
+/* ===== ESPACIO ÓPTIMO PARA MOBILE ===== */
+@media (max-width: 768px) {
+    .hero-slider {
+        margin-top: 65px; /* Espacio suficiente para el header */
+        height: 58vh;
+        min-height: 420px;
+        position: relative;
+    }
+    
+    /* Header ya ocupa su espacio, no necesitamos más */
+    .header {
+        height: 65px; /* Asegurar altura consistente */
+    }
+    
+    /* Contenido bien espaciado dentro del slider */
+    .hero-slide .container {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    .hero-slide .hero-content {
+        padding: 0.5rem;
+    }
+    
+    .hero-slide .hero-title {
+        margin-bottom: 0.8rem;
+    }
+    
+    .hero-slide .hero-subtitle {
+        margin-bottom: 1.2rem;
+        line-height: 1.4;
+    }
+    
+    .hero-slide .hero-cta {
+        gap: 0.8rem;
+        margin-top: 0.5rem;
+    }
+}
+
+/* Ajuste fino para diferentes tamaños */
+@media (max-width: 480px) {
+    .hero-slider {
+        margin-top: 60px;
+        height: 52vh;
+        min-height: 360px;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-slider {
+        margin-top: 55px;
+        height: 48vh;
+        min-height: 320px;
     }
 }

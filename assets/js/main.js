@@ -326,6 +326,50 @@ function initVideo() {
 }
 
 
+
+// ===== FAQ ACCORDION =====
+function initFAQ() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    if (faqQuestions.length === 0) return;
+    
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const isExpanded = question.getAttribute('aria-expanded') === 'true';
+            
+            // Cerrar todos primero (opcional)
+            // faqQuestions.forEach(q => {
+            //     q.setAttribute('aria-expanded', 'false');
+            //     q.nextElementSibling.style.maxHeight = '0';
+            // });
+            
+            // Toggle este
+            question.setAttribute('aria-expanded', !isExpanded);
+            
+            // Animación suave
+            const answer = question.nextElementSibling;
+            if (!isExpanded) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            } else {
+                answer.style.maxHeight = '0';
+            }
+        });
+        
+        // Apertura con teclado
+        question.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                question.click();
+            }
+        });
+    });
+}
+
+
+
+
+
+
 // ===== INICIALIZAR TODO =====
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Consultores de Salud JS - Sitio cargado');
@@ -334,6 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initSimpleSlider();
     initVideo(); // ✅ AGREGAR ESTA LÍNEA
+    initFAQ();
     
     // Smooth scroll para enlaces internos
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
